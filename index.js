@@ -1,7 +1,7 @@
 const express = require('express'); //Import the express dependency
-const app = express();              //Instantiate an express app, the main work horse of this server
-const port = 5000;                  //Save the port number where your server will be listening
-const bodyParser = require('body-parser');
+const app = express();           
+const port = 5000;                  
+const bodyParser = require('body-parser'); //dunno what anything from here 
 
 
 
@@ -10,17 +10,27 @@ app.set('view engine', 'ejs');
 app.use(express.static('views'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
-//Idiomatic expression in express to route and respond to a client request
-app.get('/', (req, res) => {        //get requests to the root ("/") will route here
-    res.render(__dirname + '/index.ejs', );      //server responds by sending the index.html file to the client's browser
-                                                        //the .sendFile method needs the absolute path to the file, see: https://expressjs.com/en/4x/api.html#res.sendFile 
+//to here does. Some middleware stuff? idk 
+
+
+app.get('/', (req, res) => {       
+    res.render(__dirname + '/index.ejs', );     
+                                                      
 });
 
+
+//how we add a route. app.get can be replced with app.post(), etc.
+// the '/login' at the start is the route 
+//__dirname puts us into the project directory, and then appends the name of the file to render
+//ejs is just buffed html, can inject javascript logic straight into it
+//while doing all the normal hrml things 
 app.get('/login', (req, res) => {
     res.render(__dirname + '/login.ejs',); 
 })
 
-app.listen(port, () => {            //server starts listening for any attempts from a client to connect at port: {port}
+
+//sets server up on port variable specified at top
+app.listen(port, () => {           
     console.log(`Now listening on port ${port}`); 
 });
 
