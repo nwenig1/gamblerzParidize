@@ -30,6 +30,7 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/createUser', userController.handleUserCreate);
+app.post('/login', userController.login); 
 
 
 //sets server up on port variable specified at top

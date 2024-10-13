@@ -20,6 +20,20 @@ async function createUser(username, password, email) {
       throw error;
     }
   }
+  async function loginUser(username, password){
+    try{
+      const result = await pool.query('SELECT * FROM users WHERE username = $1 AND password = $2', [username, password]); 
+      console.log("login query returned : " + result.rows); 
+      if(result.rows.length !=0){
+        return true 
+      }else{
+        return false; 
+      }
+    } catch(error){
+      console.error("error logging user in with db query " , error); 
+    }
+  }
   module.exports = {
-    createUser
+    createUser,
+    loginUser
   }; 
