@@ -8,7 +8,6 @@ function handleUserCreate(req, res){
     const email = req.body.email; 
     console.log("form data: " + username + " , " + password + " , " + email); 
     userModel.createUser(username, password, email); 
-    //will call model to make db call to create user accoutn
     res.send("MADE ACCUONT YAY (im lying")
 } 
 

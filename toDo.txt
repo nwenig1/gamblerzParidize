@@ -5,4 +5,4 @@ Caleb: working on password update operation/ web stuff , CSS(?) :O
 
 Noah: Login page goin, seperate from create account. Products stuff? 
 
-Trevor:  Schema + updating sql file for local setups
+Trevor:  Schema + updating sql file for local setups. Add products query? 
