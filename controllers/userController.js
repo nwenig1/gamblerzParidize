@@ -1,7 +1,8 @@
 const userModel = require('../models/userModel');
 
 
-function handleUserCreate(req, res){
+async function handleUserCreate(req, res){
+    //assumes valid create rn 
     console.log("handle create called"); 
     const username = req.body.username.trim(); 
     const password = req.body.password; 
@@ -11,8 +12,21 @@ function handleUserCreate(req, res){
     res.send("MADE ACCUONT YAY (im lying")
 } 
 
+async function login(req, res){
+    console.log("login called"); 
+    const username = req.body.username.trim(); 
+    const password = req.body.password; 
+    const  validUser = await userModel.loginUser(username, password); 
+    console.log("model returned: " + validUser); 
+    if(validUser){
+        res.send("Login worked yay"); 
+    }else {
+        res.send("login no work, not yaya"); 
+    }
+}
 
 //functions need to be here if called in other files 
 module.exports = {
-    handleUserCreate
+    handleUserCreate,
+    login
   };
