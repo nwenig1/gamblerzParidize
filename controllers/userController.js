@@ -2,6 +2,7 @@ const userModel = require('../models/userModel');
 
 
 async function handleUserCreate(req, res){
+    try{
     //assumes valid create rn 
     console.log("handle create called"); 
     const username = req.body.username.trim(); 
@@ -10,6 +11,9 @@ async function handleUserCreate(req, res){
     console.log("form data: " + username + " , " + password + " , " + email); 
     userModel.createUser(username, password, email); 
     res.send("MADE ACCUONT YAY (im lying")
+    } catch{
+        res.send("error creating user :( "); 
+    }
 } 
 
 async function login(req, res){
