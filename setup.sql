@@ -12,6 +12,13 @@ CREATE TABLE users (
 );
 
 
+--assuming product table created like schema 
+/*
+INSERT INTO products (name, description, price)
+VALUES 
+   
 
 
+
+*/
 
