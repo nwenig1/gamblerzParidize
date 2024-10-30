@@ -13,11 +13,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //to here does. Some middleware stuff? idk 
 
 const userController = require('./controllers/userController');
+const productController = require('./controllers/productController'); 
 
 app.get('/', (req, res) => {       
     res.render(__dirname + '/views/index.ejs', );     
                                                       
 });
+
+app.get('/products', productController.getAllItems); 
 
 
 //how we add a route. app.get can be replced with app.post(), etc.
