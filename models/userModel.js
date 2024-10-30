@@ -11,7 +11,7 @@ const pool = new Pool({
   port: 5432,
 });
 
-async function createUser(username, password, email) {
+async function createUser(username, password, email) { 
     try {
       const hashedpw = await bcrypt.hash(password, 10); 
       const result = await pool.query('INSERT INTO users(username, password, email) VALUES($1, $2, $3) RETURNING *', [username, hashedpw, email]);

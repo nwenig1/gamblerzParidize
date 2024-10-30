@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const userController = require('./controllers/userController');
 
 app.get('/', (req, res) => {       
-    res.render(__dirname + '/index.ejs', );     
+    res.render(__dirname + '/views/index.ejs', );     
                                                       
 });
 
@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 //ejs is just buffed html, can inject javascript logic straight into it
 //while doing all the normal hrml things 
 app.get('/login', (req, res) => {
-    res.render(__dirname + '/login.ejs',); 
+    res.render(__dirname + '/views/login.ejs',); 
 });
 
 app.post('/createUser', userController.handleUserCreate);

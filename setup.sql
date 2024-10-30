@@ -11,14 +11,21 @@ CREATE TABLE users (
   is_admin BOOLEAN 
 );
 
-
+CREATE TABLE products (
+  productID SERIAL PRIMARY KEY, 
+  name VARCHAR(32) UNIQUE NOT NULL, 
+  description VARCHAR(256) NOT NULL, 
+  price NUMERIC(10, 2) NOT NULL
+);
 --assuming product table created like schema 
-/*
+
 INSERT INTO products (name, description, price)
-VALUES 
+VALUES
+  ('Poker Table', 'It is a poker table. For playing poker', 99.99), 
+  ('Cards', 'They are cards. For playing cards', 7.32); 
    
 
 
 
-*/
+
 
