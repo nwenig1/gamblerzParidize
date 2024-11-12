@@ -5,9 +5,9 @@
 --hard code in an admin user?
 CREATE TABLE users (
   userID SERIAL PRIMARY KEY,
-  username VARCHAR(32) UNIQUE NOT NULL,
-  password VARCHAR(32) NOT NULL,
-  email VARCHAR(64) UNIQUE NOT NULL,
+  username VARCHAR(128) UNIQUE NOT NULL,
+  password VARCHAR(128) NOT NULL,
+  email VARCHAR(128) UNIQUE NOT NULL,
   is_admin BOOLEAN NOT NULL DEFAULT FALSE
 );
 
