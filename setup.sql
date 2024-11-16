@@ -8,7 +8,9 @@ CREATE TABLE users (
   username VARCHAR(128) UNIQUE NOT NULL,
   password VARCHAR(128) NOT NULL,
   email VARCHAR(128) UNIQUE NOT NULL,
-  is_admin BOOLEAN NOT NULL DEFAULT FALSE
+  is_admin BOOLEAN NOT NULL DEFAULT FALSE,
+  reset_token VARCHAR(128),
+  reset_token_expires TIMESTAMP;
 );
 
 CREATE TABLE products (
