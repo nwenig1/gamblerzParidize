@@ -41,8 +41,6 @@ app.post('/forgot-password', userController.handleForgotPassword);
 app.get('/reset-password', userController.showResetPasswordForm);
 app.post('/reset-password', userController.handleResetPassword);
 
-app.use(express.static(path.join(__dirname, 'public')));
-
 //sets server up on port variable specified at top
 app.listen(port, () => {           
     console.log(`Now listening on port ${port}`); 

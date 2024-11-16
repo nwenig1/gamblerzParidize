@@ -61,7 +61,7 @@ function generateRandomToken() {
 async function createPasswordResetToken(userID) {
     try {
         const resetToken = generateRandomToken();
-        const expires = new Date(Date.now() + 3600000); // Token valid for 1 hour
+        const expires = new Date(Date.now() + 3600000); // Token valid for 1 hour (otherwise... fuck)
         await pool.query(
             'UPDATE users SET reset_token = $1, reset_token_expires = $2 WHERE userid = $3',
             [resetToken, expires, userID]
