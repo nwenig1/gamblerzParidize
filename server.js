@@ -32,6 +32,14 @@ app.get('/login', (req, res) => {
 app.post('/createUser', userController.handleUserCreate);
 app.post('/login', userController.login); 
 
+app.get('/forgot-password', (req, res) => {
+    res.render(__dirname + '/views/forgotPassword.ejs');
+});
+
+app.post('/forgot-password', userController.handleForgotPassword);
+
+app.get('/reset-password', userController.showResetPasswordForm);
+app.post('/reset-password', userController.handleResetPassword);
 
 //sets server up on port variable specified at top
 app.listen(port, () => {           
