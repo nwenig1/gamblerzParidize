@@ -4,19 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login</title>
+    <link rel="stylesheet" href="/css/main.css">
 </head>
     <body>
-    <h2> OMG Its a login page</h2>
-    <form action = "/login" method = "POST">
-        <input type = "text" name = "username" placeholder = "Username">
-        <br>
-        <input type = "password" name = "password" placeholder = "Password">
-        <br>
-        <button type="submit">Login</button>
-        
-    </form>
-    <br>
-    <a href="/forgot-password">Forgot Password?</a>
+
+        <div class="wrapper">
+            <header>
+                <%- include('partials/navpartial') %>
+            </header>
+            <main>
+                <h2> OMG Its a login page</h2>
+                <form action = "/login" method = "POST">
+                    <input type = "text" name = "username" placeholder = "Username">
+                    <br>
+                    <input type = "password" name = "password" placeholder = "Password">
+                    <br>
+                    <button type="submit">Login</button>
+                    
+                </form>
+                <br>
+                <a href="/forgot-password">Forgot Password?</a>
+            </main>
+            <footer>
+                <%- include('partials/footerPartial') %>
+            </footer>
+        </div>
     </body>
 
 </html>
