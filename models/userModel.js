@@ -33,8 +33,11 @@ async function createUser(username, password, email) {
         console.log("userInfo: " + userInfo.password); 
         const match = await bcrypt.compare(password, userInfo.password);
         if(match){
+          req.session.username = username;
+          res.send({ success: true });//send success
           return true; 
         } else{  //invalid password 
+          res.send({ success: false }); //send false
           return false; 
         }
        

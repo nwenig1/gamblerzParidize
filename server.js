@@ -2,7 +2,7 @@ const express = require('express'); //Import the express dependency
 const app = express();           
 const port = 3000;                  
 const bodyParser = require('body-parser'); //dunno what anything from here 
-
+const session = require('express-session'); //keep a user logged in throughout the site
 
 
 app.set('view engine', 'ejs');
@@ -20,6 +20,14 @@ app.get('/', (req, res) => {
     res.render(__dirname + '/views/login.ejs', );     
                                                       
 });
+
+// This stores and keeps track of cookies
+app.use(session({
+    key: 'session_cookie_name',
+    secret: 'session_cookie_secret',
+    resave: false,
+    saveUninitialized: false
+}));
 
 
 //how we add a route. app.get can be replced with app.post(), etc.
