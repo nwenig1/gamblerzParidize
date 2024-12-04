@@ -3,11 +3,23 @@ const app = express();
 const port = 3000;                  
 const bodyParser = require('body-parser'); //dunno what anything from here 
 
+const session = require('express-session');
+
+
+app.use(
+  session({
+    secret: 'secret', // Just a simple key
+    resave: false,          // Don't save session if unmodified
+    saveUninitialized: true // Save uninitialized sessions
+  })
+);
+
 
 
 app.set('view engine', 'ejs');
 
-app.use(express.static('views'));
+app.use(express.static('public'));
+app.use('/css', express.static(__dirname + 'public/css'))
 
 app.use(bodyParser.urlencoded({ extended: true }));
 //to here does. Some middleware stuff? idk 
@@ -15,8 +27,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const userController = require('./controllers/userController');
 const productController = require('./controllers/productController'); 
 
+//Navigation
 app.get('/', (req, res) => {       
-    res.render(__dirname + '/views/index.ejs', );     
+    res.render(__dirname + '/views/login.ejs', );     
                                                       
 });
 
@@ -33,7 +46,14 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/createUser', userController.handleUserCreate);
+
 app.post('/login', userController.login); 
+
+//forgot password ifnromation
+
+app.get('/createUser', (req, res) => {
+    res.render(__dirname + '/views/index.ejs')
+})
 
 app.get('/forgot-password', (req, res) => {
     res.render(__dirname + '/views/forgotPassword.ejs');
@@ -42,6 +62,7 @@ app.get('/forgot-password', (req, res) => {
 app.post('/forgot-password', userController.handleForgotPassword);
 
 app.get('/reset-password', userController.showResetPasswordForm);
+
 app.post('/reset-password', userController.handleResetPassword);
 
 //sets server up on port variable specified at top

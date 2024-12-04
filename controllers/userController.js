@@ -16,18 +16,20 @@ async function handleUserCreate(req, res){
     }
 } 
 
-async function login(req, res){
-    console.log("login called"); 
-    const username = req.body.username.trim(); 
-    const password = req.body.password; 
-    const  validUser = await userModel.loginUser(username, password); 
-    console.log("model returned: " + validUser); 
-    if(validUser){
-        res.send("Login worked yay"); 
-    }else {
-        res.send("login no work, not yaya"); 
+async function login(req, res) {
+    console.log("login called");
+    const username = req.body.username.trim();
+    const password = req.body.password;
+    const validUser = await userModel.loginUser(username, password);
+    console.log("model returned: " + validUser);
+    if (validUser) {
+        req.session.username = username; // Store username in session
+        res.send("Login successful!");
+    } else {
+        res.send("Invalid login credentials.");
     }
 }
+
 
 async function handleForgotPassword(req, res) {
     const email = req.body.email.trim();
@@ -77,6 +79,8 @@ async function handleResetPassword(req, res) {
         res.send('An error occurred.');
     }
 }
+
+
 
 //functions need to be here if called in other files 
 module.exports = {
