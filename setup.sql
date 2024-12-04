@@ -47,11 +47,47 @@ CREATE TABLE images (
   productID INTEGER NOT NULL,
   FOREIGN KEY (productID) REFERENCES products(productID)
 );
-
+INSERT INTO images (fileName, altDescription, productID)
+VALUES  
+  ('pokerTable1.png', 'poker table picture', 1), 
+  ('pokerTable2.png', 'poker table picture', 1), 
+  ('pokerTable3.png', 'poker table picture', 1), 
+  ('chips1.png', 'chips picture', 2), 
+  ('chips2.png', 'chips picture', 2),
+  ('chips3.png', 'chips picture', 2), 
+  ('cards1.png', 'cards picture', 3), 
+  ('cards2.png', 'cards picture', 3), 
+  ('cards3.png', 'cards picture', 3), 
+  ('wheel1.png', 'wheel picture', 4), 
+  ('wheel2.png', 'wheel picture', 4), 
+  ('wheel3.png', 'wheel picture', 4), 
+  ('dice1.png', 'dice picture', 5),
+  ('dice2.png', 'dice picture', 5),
+  ('dice3.png', 'dice picture', 5),
+  ('craps1.png', 'craps picture', 6),
+  ('craps2.png', 'craps picture', 6),
+  ('craps3.png', 'craps picture', 6),
+  ('slotMachine1.png', 'slot machine picture', 7),
+  ('slotMachine2.png', 'slot machine picture', 7),
+  ('slotMachine3.png', 'slot machine picture', 7),
+  ('blackjack1.png', 'blackjack table', 8),
+  ('blackjack2.png', 'blackjack table', 8),
+  ('blackjack3.png', 'blackjack table', 8),
+  ('cardShoe1.png', 'card shoe picture', 9), 
+  ('cardShoe2.png', 'card shoe picture', 9), 
+  ('cardShoe3.png', 'card shoe picture', 9), 
+  ('cardShuffler1.png', 'card shuffler picture', 10),
+  ('cardShuffler2.png', 'card shuffler picture', 10),
+  ('cardShuffler3.png', 'card shuffler picture', 10),
+  ('chair1.png', 'chair picture', 11), 
+  ('chair2.png', 'chair picture', 11), 
+  ('chair3.png', 'chair picture', 11), 
+  ('bingoBalls1.png', 'bingo balls picture', 12),
+  ('bingoBalls2.png', 'bingo balls picture', 12),
+  ('bingoBalls3.png', 'bingo balls picture', 12);
 
 
 --assuming product table created like schema 
-
 INSERT INTO products (name, description, price)
 VALUES
   ('Poker Table', 'It is a poker table. For playing poker', 99.99), 
@@ -66,6 +102,9 @@ VALUES
   ('Shuffler', 'Automatic card shuffler for up to 6 decks', 34.99),
   ('Casino Chair', 'Ergonomic casino chair for comfortable gaming', 79.99),
   ('Keno Balls', 'Set of numbered Keno balls, 1-80', 19.99); 
+
+
+  
 
 
 
