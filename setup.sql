@@ -32,15 +32,9 @@ VALUES
   ('Slot Machine', 'Fully functional slot machine for personal use', 899.00),
   ('Blackjack Table', 'Blackjack table with card holder and chip tray', 149.99),
   ('Dealer Shoe', 'Multi-deck card dealer shoe for blackjack', 39.99),
-  ('Chip Case', 'Aluminum poker chip carrying case, holds 500 chips', 24.99),
   ('Shuffler', 'Automatic card shuffler for up to 6 decks', 34.99),
-  ('Betting Chips', 'High-quality betting chips, assorted colors, set of 200', 59.99),
-  ('Croupier Stick', 'Croupier stick for managing bets on roulette tables', 14.99),
   ('Casino Chair', 'Ergonomic casino chair for comfortable gaming', 79.99),
-  ('Felt Layout', 'Casino-grade felt layout for various games', 29.99),
-  ('Baccarat Shoe', 'Professional baccarat shoe for dealing cards', 49.99),
-  ('Keno Balls', 'Set of numbered Keno balls, 1-80', 19.99),
-  ('Roulette Chips', 'Non-denominated roulette chips, set of 100', 39.99);
+  ('Keno Balls', 'Set of numbered Keno balls, 1-80', 19.99); 
 
 
 
