@@ -1,5 +1,6 @@
 const { Pool } = require('pg');
 const bcrypt = require("bcrypt");
+const crypto = require("crypto")
 
 
 //connects to db 
@@ -42,7 +43,68 @@ async function createUser(username, password, email) {
       console.error("error logging user in with db query " , error); 
     }
   }
+
+async function findUserByEmail(email) {
+    try {
+        const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+        return result.rows[0] || null;
+    } catch (error) {
+        console.error('Error finding user by email:', error);
+        throw error;
+    }
+}
+
+function generateRandomToken() {
+    return crypto.randomBytes(32).toString('hex');
+}
+
+async function createPasswordResetToken(userID) {
+    try {
+        const resetToken = generateRandomToken();
+        const expires = new Date(Date.now() + 3600000); // Token valid for 1 hour (otherwise... fuck)
+        await pool.query(
+            'UPDATE users SET reset_token = $1, reset_token_expires = $2 WHERE userid = $3',
+            [resetToken, expires, userID]
+        );
+        return resetToken;
+    } catch (error) {
+        console.error('Error creating password reset token:', error);
+        throw error;
+    }
+}
+
+async function findUserByResetToken(token) {
+    try {
+        const now = new Date();
+        const result = await pool.query(
+            'SELECT * FROM users WHERE reset_token = $1 AND reset_token_expires > $2',
+            [token, now]
+        );
+        return result.rows[0] || null;
+    } catch (error) {
+        console.error('Error finding user by reset token:', error);
+        throw error;
+    }
+}
+
+async function updatePassword(userID, newPassword) {
+    try {
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        await pool.query(
+            'UPDATE users SET password = $1, reset_token = NULL, reset_token_expires = NULL WHERE userid = $2',
+            [hashedPassword, userID]
+        );
+    } catch (error) {
+        console.error('Error updating password:', error);
+        throw error;
+    }
+}
+  
   module.exports = {
     createUser,
-    loginUser
-  }; 
+    loginUser,
+    findUserByEmail,
+    createPasswordResetToken,
+    findUserByResetToken,
+    updatePassword,
+};
