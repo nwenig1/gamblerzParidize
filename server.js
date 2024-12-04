@@ -3,6 +3,17 @@ const app = express();
 const port = 3000;                  
 const bodyParser = require('body-parser'); //dunno what anything from here 
 
+const session = require('express-session');
+
+
+app.use(
+  session({
+    secret: 'secret', // Just a simple key
+    resave: false,          // Don't save session if unmodified
+    saveUninitialized: true // Save uninitialized sessions
+  })
+);
+
 
 
 app.set('view engine', 'ejs');
@@ -36,6 +47,10 @@ app.post('/createUser', userController.handleUserCreate);
 app.post('/login', userController.login); 
 
 //forgot password ifnromation
+
+app.get('/createUser', (req, res) => {
+    res.render(__dirname + '/views/index.ejs')
+})
 
 app.get('/forgot-password', (req, res) => {
     res.render(__dirname + '/views/forgotPassword.ejs');
