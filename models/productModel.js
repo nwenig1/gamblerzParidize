@@ -18,6 +18,43 @@ async function getAllItemsFromDB() {
       }
     }
 
+  async function getAllImagesFromDB() {
+    try {
+      const allImages = await pool.query('SELECT * FROM images'); 
+      return allImages.rows; 
+
+    } catch(error){
+      console.error("error getting all images in model"); 
+      throw error; 
+    }
+  }
+
+  async function getOneItem(productId){
+    try{
+      console.log("one item called"); 
+      const product = await pool.query("Select * FROM products WHERE productid = $1", [productId]); 
+      return product.rows[0]; 
+    } catch(error){
+      console.error("error getting single item in model"); 
+      throw error; 
+    }
+  }
+  
+  async function getOneItemImages(productId){
+    try{
+      console.log("one item's images called"); 
+      const images = await pool.query("Select * FROM images WHERE productid = $1", [productId]); 
+      return images.rows; 
+    } catch(error){
+      console.error("error getting single item in model"); 
+      throw error; 
+    }
+  }
+    
+
     module.exports = {
-      getAllItemsFromDB
+      getAllItemsFromDB,
+      getAllImagesFromDB, 
+      getOneItem, 
+      getOneItemImages
     }; 

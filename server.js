@@ -33,7 +33,15 @@ app.get('/', (req, res) => {
                                                       
 });
 
-app.get('/products', productController.getAllItems); 
+
+app.get('/products', (req, res) => {
+    const productId = (typeof req.query.productId === 'undefined') ? "notSpecified" : req.query.productId
+    if(productId === "notSpecified"){
+        productController.getAllItems(req, res); 
+    }else{
+        productController.getOneItem(req, res, productId); 
+    }
+})
 
 
 //how we add a route. app.get can be replced with app.post(), etc.
