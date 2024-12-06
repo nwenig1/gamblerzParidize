@@ -32,6 +32,7 @@ async function createUser(username, password, email) {
         const userInfo = result.rows[0]; 
         console.log("userInfo: " + userInfo.password); 
         const match = await bcrypt.compare(password, userInfo.password);
+        console.log("match?" + match);
         if(match){
           return true; 
         } else{  //invalid password 
@@ -43,6 +44,52 @@ async function createUser(username, password, email) {
       console.error("error logging user in with db query " , error); 
     }
   }
+
+  async function userIdFetch(username) {
+    try {
+      const result = await pool.query('SELECT userid FROM users WHERE username = $1', [username]);
+      if (result.rows.length > 0) {
+        const userId = result.rows[0].userid; // Accessing the 'userid' column from the query result
+        return userId;
+      } else {
+        throw new Error('User not found');
+      }
+    } catch (error) {
+      console.error("Failed to fetch userID:", error);
+      throw error; // Throwing error to handle it in the calling function
+    }
+  }
+  
+
+  async function addToCart(userId, productId) {
+    try {
+        if (!userId || !productId) {
+            throw new Error("userId or productId is missing");
+        }
+
+        const result = await pool.query(
+            'SELECT * FROM carts WHERE userId = $1 AND productId = $2',
+            [userId, productId]
+        );
+
+        if (result.rows.length === 0) {
+            await pool.query(
+                'INSERT INTO carts (userId, productId, quantity) VALUES ($1, $2, 1)',
+                [userId, productId]
+            );
+        } else {
+            await pool.query(
+                'UPDATE carts SET quantity = quantity + 1 WHERE userId = $1 AND productId = $2',
+                [userId, productId]
+            );
+        }
+    } catch (error) {
+        console.error('Error adding to cart:', error);
+        throw error; 
+    }
+}
+
+
 
 async function findUserByEmail(email) {
     try {
@@ -107,4 +154,6 @@ async function updatePassword(userID, newPassword) {
     createPasswordResetToken,
     findUserByResetToken,
     updatePassword,
+    addToCart,
+    userIdFetch
 };

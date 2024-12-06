@@ -15,18 +15,27 @@ async function handleUserCreate(req, res){
         res.send("error creating user :( "); 
     }
 } 
-
 async function login(req, res) {
     console.log("login called");
     const username = req.body.username.trim();
     const password = req.body.password;
-    const validUser = await userModel.loginUser(username, password);
-    console.log("model returned: " + validUser);
-    if (validUser) {
-        req.session.username = username; // Store username in session
-        res.send("Login successful!");
-    } else {
-        res.send("Invalid login credentials.");
+
+    try {
+        const validUser = await userModel.loginUser(username, password);
+        console.log("Model returned: " + validUser);
+
+        if (validUser) {
+            req.session.username = username; // Store username in session
+            const userId = await userModel.userIdFetch(username); // Fetch the userId from the database
+            req.session.userId = userId; // Store userId in session
+            console.log("UserId stored in session:", userId);
+            res.send("Login successful!");
+        } else {
+            res.send("Invalid login credentials.");
+        }
+    } catch (error) {
+        console.error("Error during login:", error);
+        res.status(500).send("An error occurred during login.");
     }
 }
 
@@ -45,6 +54,25 @@ async function handleForgotPassword(req, res) {
     } catch (error) {
         console.error('Error handling forgot password:', error);
         res.send('An error occurred while processing your request.');
+    }
+}
+
+async function handleAddToCart(req, res) {
+    const userId = req.session.userId; // Retrieve userId from session
+    const productId = parseInt(req.body.productId, 10); // Parse productId as integer
+
+    console.log("Received productId:", productId); // Debugging
+
+    if (!userId || !productId) {
+        return res.status(400).send("Missing userId or productId");
+    }
+
+    try {
+        await userModel.addToCart(userId, productId);
+        res.send("Product added to cart successfully!");
+    } catch (error) {
+        console.error("Error adding to cart:", error);
+        res.status(500).send("Failed to add product to cart.");
     }
 }
 
@@ -88,5 +116,6 @@ module.exports = {
     login,
     handleForgotPassword,
     showResetPasswordForm,
-    handleResetPassword
+    handleResetPassword,
+    handleAddToCart
   };

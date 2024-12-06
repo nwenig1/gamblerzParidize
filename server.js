@@ -73,6 +73,12 @@ app.get('/reset-password', userController.showResetPasswordForm);
 
 app.post('/reset-password', userController.handleResetPassword);
 
+app.get('/product/:id', (req, res) => {
+    res.render(__dirname + '/views/product.ejs');
+});
+
+app.post('/add-to-cart', userController.handleAddToCart);
+
 //sets server up on port variable specified at top
 app.listen(port, () => {           
     console.log(`Now listening on port ${port}`); 

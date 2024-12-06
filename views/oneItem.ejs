@@ -1,19 +1,23 @@
-<!DOCTYPE html> 
-<html> 
-<head> 
-    <title>One Product Page</title> 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>One Product Page</title>
+</head>
+<body>
+    <h3>Name: <%= product.name %></h3>
+    <h3>Price: <%= product.price %></h3>
 
-    </head>
-    <body>
-        <h3> Name: <%=product.name %> </h3>
-        <h3> Price: <%=product.price%> </h3>
-        
-<% images.forEach(function(image, index) { %>
-   
-        <img src="/images/<%= image.filename %>" alt="./images/<%= image.altdescription%>" width="225" height="225">
-    <br>
-<% }); %>
-    <form action = "/" method = "POST"> //add in action
+    <% images.forEach(function(image) { %>
+        <img src="/images/<%= image.filename %>" alt="<%= image.altdescription %>" width="225" height="225">
+        <br>
+    <% }); %>
+
+    <!-- Add to Cart Form -->
+    <form action="/add-to-cart" method="POST">
+        <!-- Include productId as a hidden input -->
+        <input type="hidden" name="productId" value="<%= product.productid %>">
         <button type="submit">Add To Cart</button>
     </form>
-    </body>
+    
+<body>
+</html>
