@@ -5,7 +5,18 @@
 
     </head>
     <body>
-
+        <h3><%= JSON.stringify(items) %></h3>
+        <% items.forEach(function(item, index) { %>
+            <div class="product">
+                <h3>Price: $<%= item.price %></h3>
+                <h3> Name: <%= item.name %> </h3>
+              
+        
+            </div>
+        
+            <br>
+            <br>
+        <% }); %>
     
 
     </body>

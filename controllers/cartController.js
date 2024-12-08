@@ -1,4 +1,5 @@
 const cartModel = require("../models/cartModel"); 
+const productModel = require("../models/productModel"); 
 
 async function handleAddToCart(req, res) {
     const userId = req.session.userId; // Retrieve userId from session
@@ -26,10 +27,32 @@ cartModel.checkout(userId);
 res.send("Checked out sucessfully! Your items will be arriving soon!"); 
 }
 
-async function getItemsInCart(req, res){
-    //grab userId from cookies here
-    const userId = 1; 
-    cartItems = cartModel.getCartItems; 
+async function displayCart(req, res){
+   // const userId = req.session.userId; // Retrieve userId from session
+    const userId = 2; //so i dont have to relog in everytime i restart server 
+    if(!userId){
+        return res.status(400).send("You're not logged in! (Or devs are bad)");
+    }
+    cartItems = await cartModel.getCartItems(userId);
+    /*
+    viewInfo = []; 
+    //this could probably be done with a join actually 
+    cartItems.forEach(function(item){
+        itemInfo = await productModel.getOneItem(item.productid); 
+        getOneItemImage = await productModel.getOneItemImages(item.productid); 
+        console.log(getOneItemImage); 
+        firstImage = getOneItemImage[0]; 
+        
+        itemObj = {
+            "name": itemInfo.name, 
+            "quantity" : item.quantity, //comes from cartItems call 
+            "price" : itemInfo.price,
+            "imageName" : firstImage.filename
+        }
+        console.log("item object: " + itemObj); 
+        viewInfo.push(itemObj);
+    }); 
+    */
     res.render("../views/pages/cart.ejs", {items: cartItems});  
 }
 
@@ -45,5 +68,6 @@ async function removeItemFromCart(req, res){
 module.exports ={
     handleAddToCart,
     checkout,
-    getItemsInCart
+    displayCart,
+    removeItemFromCart
 };

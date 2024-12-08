@@ -47,8 +47,9 @@ const pool = new Pool({
   }
   async function getCartItems(userId){
     try{
-        items = await pool.query("SELECT * FROM cart WHERE userid = $1", [userId]); 
-        return results.rows; 
+        items = await pool.query("SELECT products.productid, products.name, products.price, carts.quantity, images.filename  FROM products JOIN carts ON carts.productid = products.productid Join images ON images.productid = carts.productid WHERE userid = $1 ", [userId]); 
+        console.log("model returned: " + items); 
+        return items.rows; 
     } catch(error){
         console.error("Error getting cart items in model: " + error); 
         throw error; 

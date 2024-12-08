@@ -81,6 +81,8 @@ app.get('/product/:id', (req, res) => {
     res.render(__dirname + '/views/product.ejs');
 });
 
+
+app.get('/cart', cartController.displayCart); 
 app.post('/add-to-cart', cartController.handleAddToCart);
 
 //sets server up on port variable specified at top
