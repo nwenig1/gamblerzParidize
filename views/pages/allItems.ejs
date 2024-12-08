@@ -11,8 +11,11 @@
         <h3>Price: $<%= product.price %></h3>
         <h3> Name: <a href="/products?productId= <%= product.productid %> "><%= product.name %></a></h3>
         <h3> Description: <%= product.description %></h3>
-        <img src="/images/<%= images[index*3].filename %>" alt="./images/<%=images[index*3].altdescription%>" width="225" height="225">
+        <img src="/images/<%=images[index*3].filename%>" alt="<%=images[index*3].altdescription%>" width="225" height="225">
+      
+
     </div>
+
     <br>
     <br>
 <% }); %>

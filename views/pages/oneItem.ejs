@@ -1,0 +1,16 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>One Product Page</title> 
+
+    </head>
+    <body>
+        <h3> Name: <%=product.name %> </h3>
+        <h3> Price: <%=product.price%> </h3>
+        
+<% images.forEach(function(image, index) { %>
+   
+        <img src="/images/<%= image.filename %>" alt="./images/<%= image.altdescription%>" width="225" height="225">
+    <br>
+<% }); %>
+    </body>

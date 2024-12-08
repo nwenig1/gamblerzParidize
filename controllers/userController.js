@@ -49,7 +49,7 @@ async function handleForgotPassword(req, res) {
         } else {
             const resetToken = await userModel.createPasswordResetToken(user.userid);
             const resetLink = `http://localhost:3000/reset-password?token=${resetToken}`;
-            res.render('displayResetLink', { resetLink });
+            res.render('../views/pages/displayResetLink', { resetLink });
         }
     } catch (error) {
         console.error('Error handling forgot password:', error);
@@ -83,7 +83,7 @@ async function showResetPasswordForm(req, res) {
         if (!user) {
             res.send('Invalid or expired password reset token.');
         } else {
-            res.render('resetPassword.ejs', { token });
+            res.render('../views/pages/resetPassword.ejs', { token });
         }
     } catch (error) {
         console.error('Error displaying reset password form:', error);

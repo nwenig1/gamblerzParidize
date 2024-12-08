@@ -2,7 +2,8 @@
 
 --add admin bool to this 
 --always 0 for controller 
---hard code in an admin user?
+--hard code in an admin user? 
+--actuallyt just making one normally than modifying it will be easier (hash will be weird if putting it in manually)
 CREATE TABLE users (
   userID SERIAL PRIMARY KEY,
   username VARCHAR(128) UNIQUE NOT NULL,

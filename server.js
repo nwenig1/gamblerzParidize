@@ -20,6 +20,9 @@ app.set('view engine', 'ejs');
 
 app.use(express.static('public'));
 app.use('/css', express.static(__dirname + 'public/css'))
+app.use('/images', express.static(__dirname + 'punlic/images'))
+
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 //to here does. Some middleware stuff? idk 
@@ -29,7 +32,7 @@ const productController = require('./controllers/productController');
 
 //Navigation
 app.get('/', (req, res) => {       
-    res.render(__dirname + '/views/login.ejs', );     
+    res.render(__dirname + '/views/pages/login.ejs', );     
                                                       
 });
 
@@ -50,7 +53,7 @@ app.get('/products', (req, res) => {
 //ejs is just buffed html, can inject javascript logic straight into it
 //while doing all the normal hrml things 
 app.get('/login', (req, res) => {
-    res.render(__dirname + '/views/login.ejs',); 
+    res.render(__dirname + '/views/pages/login.ejs',); 
 });
 
 app.post('/createUser', userController.handleUserCreate);
@@ -60,11 +63,11 @@ app.post('/login', userController.login);
 //forgot password ifnromation
 
 app.get('/createUser', (req, res) => {
-    res.render(__dirname + '/views/index.ejs')
+    res.render(__dirname + '/views/pages/index.ejs')
 })
 
 app.get('/forgot-password', (req, res) => {
-    res.render(__dirname + '/views/forgotPassword.ejs');
+    res.render(__dirname + '/views/pages/forgotPassword.ejs');
 });
 
 app.post('/forgot-password', userController.handleForgotPassword);
