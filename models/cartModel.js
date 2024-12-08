@@ -47,7 +47,7 @@ const pool = new Pool({
   }
   async function getCartItems(userId){
     try{
-        items = await pool.query("SELECT products.productid, products.name, products.price, carts.quantity, images.filename  FROM products JOIN carts ON carts.productid = products.productid Join images ON images.productid = carts.productid WHERE userid = $1 ", [userId]); 
+        items = await pool.query("SELECT DISTINCT ON (products.productid) products.productid, products.name, products.price, carts.quantity, images.filename FROM products JOIN carts ON carts.productid = products.productid JOIN images ON images.productid = carts.productid WHERE userid = $1 ORDER BY products.productid, images.filename;", [userId]); 
         console.log("model returned: " + items); 
         return items.rows; 
     } catch(error){
