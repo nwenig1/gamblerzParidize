@@ -20,7 +20,7 @@ app.set('view engine', 'ejs');
 
 app.use(express.static('public'));
 app.use('/css', express.static(__dirname + 'public/css'))
-app.use('/images', express.static(__dirname + 'punlic/images'))
+app.use('/images', express.static(__dirname + 'public/images'))
 
 
 
@@ -29,6 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const userController = require('./controllers/userController');
 const productController = require('./controllers/productController'); 
+const cartController = require('./controllers/cartController'); 
 
 //Navigation
 app.get('/', (req, res) => {       
@@ -80,7 +81,7 @@ app.get('/product/:id', (req, res) => {
     res.render(__dirname + '/views/product.ejs');
 });
 
-app.post('/add-to-cart', userController.handleAddToCart);
+app.post('/add-to-cart', cartController.handleAddToCart);
 
 //sets server up on port variable specified at top
 app.listen(port, () => {           

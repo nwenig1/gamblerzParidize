@@ -61,36 +61,6 @@ async function createUser(username, password, email) {
   }
   
 
-  async function addToCart(userId, productId) {
-    try {
-        if (!userId || !productId) {
-            throw new Error("userId or productId is missing");
-        }
-
-        const result = await pool.query(
-            'SELECT * FROM carts WHERE userId = $1 AND productId = $2',
-            [userId, productId]
-        );
-
-        if (result.rows.length === 0) {
-            await pool.query(
-                'INSERT INTO carts (userId, productId, quantity) VALUES ($1, $2, 1)',
-                [userId, productId]
-            );
-        } else {
-            await pool.query(
-                'UPDATE carts SET quantity = quantity + 1 WHERE userId = $1 AND productId = $2',
-                [userId, productId]
-            );
-        }
-    } catch (error) {
-        console.error('Error adding to cart:', error);
-        throw error; 
-    }
-}
-
-
-
 async function findUserByEmail(email) {
     try {
         const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
@@ -154,6 +124,5 @@ async function updatePassword(userID, newPassword) {
     createPasswordResetToken,
     findUserByResetToken,
     updatePassword,
-    addToCart,
     userIdFetch
 };

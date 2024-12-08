@@ -12,5 +12,10 @@
    
         <img src="/images/<%= image.filename %>" alt="./images/<%= image.altdescription%>" width="225" height="225">
     <br>
+    
 <% }); %>
+<form action="/add-to-cart" method="POST">
+    <input type="hidden" name="productId" value="<%= product.productid %>">
+    <button type="submit">Add To Cart</button>
+</form>
     </body>

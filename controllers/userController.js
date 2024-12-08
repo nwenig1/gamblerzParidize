@@ -57,24 +57,7 @@ async function handleForgotPassword(req, res) {
     }
 }
 
-async function handleAddToCart(req, res) {
-    const userId = req.session.userId; // Retrieve userId from session
-    const productId = parseInt(req.body.productId, 10); // Parse productId as integer
 
-    console.log("Received productId:", productId); // Debugging
-
-    if (!userId || !productId) {
-        return res.status(400).send("Missing userId or productId");
-    }
-
-    try {
-        await userModel.addToCart(userId, productId);
-        res.send("Product added to cart successfully!");
-    } catch (error) {
-        console.error("Error adding to cart:", error);
-        res.status(500).send("Failed to add product to cart.");
-    }
-}
 
 async function showResetPasswordForm(req, res) {
     const token = req.query.token;
@@ -117,5 +100,4 @@ module.exports = {
     handleForgotPassword,
     showResetPasswordForm,
     handleResetPassword,
-    handleAddToCart
   };
