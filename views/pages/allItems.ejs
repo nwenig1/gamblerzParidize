@@ -9,19 +9,19 @@
             <%- include('../partials/navpartial') %>
         </header>
 
-<% products.forEach(function(product, index) { %>
-    <div class="product">
-        <h3>Price: $<%= product.price %></h3>
-        <h3> Name: <a href="/products?productId= <%= product.productid %> "><%= product.name %></a></h3>
-        <h3> Description: <%= product.description %></h3>
-        <img src="/images/<%=images[index*3].filename%>" alt="<%=images[index*3].altdescription%>" width="225" height="225">
-      
 
-    </div>
-
-    <br>
-    <br>
-<% }); %>
+        <div class="products-container">
+            <% products.forEach(function(product, index) { %>
+                <div class="product">
+                    <div class="product-box"> 
+                        <h1> <a href="/products?productId= <%= product.productid %> "><%= product.name %></a></h3>
+                        <h2>  $<%= product.price %></h3>
+                        <img src="/images/<%=images[index*3].filename%>" alt="<%=images[index*3].altdescription%>" width="225" height="225">
+                        <h3> <%= product.description %></h3>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
 <footer>
     <%- include('../partials/footerPartial') %>
 </footer>

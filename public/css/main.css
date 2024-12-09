@@ -1,7 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 body {
     background-color: #eee;
-
+    font-family: 'Roboto', sans-serif;
 }
+
+h1, h2, h3 {
+    font-family: 'Roboto', sans-serif;
+}
+
+a {
+    color: orange;
+}
+
+header {
+    position: sticky;
+    top: 0px;
+    z-index: 999;
+}
+
 
 .wrapper {
     gap: 10px;
@@ -33,9 +50,14 @@ footer {
 
 .nav-partial nav {
     background-color: #c4c4c4;
-    border-radius: 4px;
+    position: sticky;
+    border: 1px solid #a1a1a1;
+    border-radius: 6px;
     padding-left: 20px;
     padding-right: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -55,3 +77,25 @@ footer {
     color: rgb(0, 0, 0);
     text-decoration: none;
 }
+
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; /* Space between boxes */
+    padding: 20px;
+  }
+  
+  .product {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .product-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }

@@ -1,7 +1,6 @@
 
 Over next week or 2? 
 
-Caleb: working on password update operation/ web stuff , CSS(?) :O
 
 Noah: Login page goin, seperate from create account. Products stuff? 
 
