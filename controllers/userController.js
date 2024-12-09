@@ -11,10 +11,14 @@ async function handleUserCreate(req, res){
     const email = req.body.email; 
     console.log("form data: " + username + " , " + password + " , " + email); 
     await userModel.createUser(username, password, email); 
+<<<<<<< HEAD
     const userId = await userModel.userIdFetch(username); // Fetch the userId from the database
     req.session.username = username; // Store username in session
     req.session.userId = userId; // Store userId in session
     productController.getAllItems(req, res); 
+=======
+    res.redirect('/login?message=User%20created%20successfully')
+>>>>>>> c28165c6c8cf8d928bcc2a231e67cabab53cdd2b
     } catch{
         res.send("error creating user :( "); 
     }
@@ -33,7 +37,11 @@ async function login(req, res) {
             const userId = await userModel.userIdFetch(username); // Fetch the userId from the database
             req.session.userId = userId; // Store userId in session
             console.log("UserId stored in session:", userId);
+<<<<<<< HEAD
             productController.getAllItems(req, res); 
+=======
+            res.redirect('/products?message=Login%20Successful')
+>>>>>>> c28165c6c8cf8d928bcc2a231e67cabab53cdd2b
         } else {
             res.send("Invalid login credentials.");
         }
