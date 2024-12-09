@@ -5,18 +5,14 @@
     <link rel="stylesheet" href="/css/main.css">
     </head>
     <body>
-<<<<<<< HEAD
+        <header>
+            <%- include('../partials/navpartial') %>
+        </header>
         <h1> YOUR CART!</h1>
         <% total = 0 %>
         <% if(items.length === 0) {%>
         <h2> Wait nvm your cart is empty :( </h2>
         <% }else{ %>
-=======
-        <header>
-            <%- include('../partials/navpartial') %>
-        </header>
-        <h3><%= JSON.stringify(items) %></h3>
->>>>>>> c28165c6c8cf8d928bcc2a231e67cabab53cdd2b
         <% items.forEach(function(item, index) { %>
             <div class="product">
                 <h3>Price: $<%= item.price %></h3>
@@ -39,7 +35,7 @@
         <form action = "/checkout" method = "POST">  
             <button type = "submit" >Checkout </button>
         </form>
-        <% } %>  
+        <% } %>
     
 
     </body>

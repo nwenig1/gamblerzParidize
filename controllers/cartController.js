@@ -32,6 +32,7 @@ async function displayCart(req, res){
         return res.status(400).send("You're not logged in! (Or devs are bad)");
     }
     cartItems = await cartModel.getCartItems(userId);
+    console.log("cart items:" + cartItems); 
     res.render("../views/pages/cart.ejs", {items: cartItems});  
 }
 
