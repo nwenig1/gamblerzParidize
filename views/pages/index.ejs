@@ -4,6 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gamblerz Paridize</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        /* Reset some basic styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Roboto, sans-serif;
+            
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background: #f4f4f4;
+            
+        }
+
+        .wrapper {
+            background: white;
+            padding: 2rem;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        button {
+            padding: 0.8rem;
+            background: rgb(255, 0, 102);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: rgb(162, 0, 65);
+        }
+
+        a {
+            text-decoration: none;
+            color: rgb(255, 0, 102);
+            font-size: 0.9rem;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        .more-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        main {
+            background-color: rgb(235, 235, 235);
+        }
+    </style>
 
 </head>
     <body>
@@ -11,8 +103,6 @@
             
         </header>
         <main>
-        <%- include('../partials/navpartial') %>
-        <h1>YOUR ONE IN ALL<br>SOLUTION FOR<br>EVERYTHING GAMBLING.</h1>
         <h2> Create Account:</h2>
             <p> Already have one? <a href="/login">Login </a> here!</p>
         <br>  

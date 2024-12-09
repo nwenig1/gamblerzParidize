@@ -2,23 +2,37 @@
 <html> 
 <head> 
     <title>One Product Page</title> 
-
+    <link rel="stylesheet" href="/css/main.css">
     </head>
     <body>
-        <h3> Name: <%=product.name %> </h3>
-        <h3> Price: <%=product.price%> </h3>
-        
-<% images.forEach(function(image, index) { %>
-   
-        <img src="/images/<%= image.filename %>" alt="./images/<%= image.altdescription%>" width="225" height="225">
-    <br>
-    
-<% }); %>
-<form action="/add-to-cart" method="POST">
-    <input type="hidden" name="productId" value="<%= product.productid %>">
-    <button type="submit">Add To Cart</button>
-</form>
-<footer>
-    <%- include('../partials/footerPartial') %>
-</footer>
+        <header>
+            <%- include('../partials/navpartial') %>
+        </header>
+
+        <div class="product-page-container">
+            <div class="product-images-inside">
+                <% images.forEach(function(image, index) { %>
+                    <img src="/images/<%= image.filename %>" alt="./images/<%= image.altdescription%>" width="225" height="225">
+                    <br>
+                <% }); %>
+            </div>
+            <div class="product-details-inside">
+                <div class="product-name-inside">
+                    <h3><%= product.name %></h3>
+                </div>
+                <div class="product-description-inside">
+                    <h3> <%= product.description %></h3>
+                </div>
+                <div class="product-price-inside">
+                    <h3>$<%= product.price %></h3>
+                </div>
+                <form action="/add-to-cart" method="POST">
+                    <input type="hidden" name="productId" value="<%= product.productid %>">
+                    <button type="submit">Add To Cart</button>
+                </form>
+            </div>
+        </div>
     </body>
+    <footer>
+        <%- include('../partials/footerPartial') %>
+    </footer>

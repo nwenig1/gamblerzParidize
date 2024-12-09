@@ -10,7 +10,7 @@ h1, h2, h3 {
 }
 
 a {
-    color: orange;
+    color: rgb(255, 0, 102);
 }
 
 header {
@@ -99,3 +99,40 @@ footer {
     justify-content: center;
     align-items: center;
   }
+
+/* Center the grid container and control its width */
+.product-page-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+    max-width: 800px; /* Adjust as needed */
+    margin: 0 auto;
+}
+
+/* Ensure images line up nicely */
+.product-images-inside {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: start;
+}
+
+/* Style the details section */
+.product-details-inside {
+    background: #fff;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+.product-name-inside {
+    font-size: larger;
+}
+.product-description-inside {
+    font-weight: 300;
+}
