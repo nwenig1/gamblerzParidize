@@ -9,8 +9,8 @@ async function handleUserCreate(req, res){
     const password = req.body.password; 
     const email = req.body.email; 
     console.log("form data: " + username + " , " + password + " , " + email); 
-    userModel.createUser(username, password, email); 
-    res.send("MADE ACCUONT YAY (im lying")
+    await userModel.createUser(username, password, email); 
+    res.redirect('/login?message=User%20created%20successfully')
     } catch{
         res.send("error creating user :( "); 
     }
@@ -29,7 +29,7 @@ async function login(req, res) {
             const userId = await userModel.userIdFetch(username); // Fetch the userId from the database
             req.session.userId = userId; // Store userId in session
             console.log("UserId stored in session:", userId);
-            res.send("Login successful!");
+            res.redirect('/products?message=Login%20Successful')
         } else {
             res.send("Invalid login credentials.");
         }

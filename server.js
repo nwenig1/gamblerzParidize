@@ -45,6 +45,7 @@ app.get('/products', (req, res) => {
     }else{
         productController.getOneItem(req, res, productId); 
     }
+
 })
 
 

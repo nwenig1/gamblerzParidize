@@ -9,10 +9,16 @@
     <body>
 
         <div class="wrapper">
-            <header>
-                <%- include('../partials/navpartial') %>
-            </header>
+
             <main>
+                <script>
+                    // Check if the query parameter 'message' exists and show an alert
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const message = urlParams.get('message');
+                    if (message) {
+                        alert(message); // Show alert
+                    }
+                </script>
                 <h2> OMG Its a login page</h2>
                 <form action = "/login" method = "POST">
                     <input type = "text" name = "username" placeholder = "Username">
@@ -23,7 +29,10 @@
                     
                 </form>
                 <br>
+                <a href="/createUser">Create New User</a>
+                <br>
                 <a href="/forgot-password">Forgot Password?</a>
+                
             </main>
             <footer>
                 <%- include('../partials/footerPartial') %>

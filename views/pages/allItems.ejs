@@ -2,9 +2,12 @@
 <html> 
 <head> 
     <title>All Products Page</title> 
-
+    <link rel="stylesheet" href="/css/main.css">
     </head>
     <body>
+        <header>
+            <%- include('../partials/navpartial') %>
+        </header>
 
 <% products.forEach(function(product, index) { %>
     <div class="product">
@@ -19,5 +22,8 @@
     <br>
     <br>
 <% }); %>
+<footer>
+    <%- include('../partials/footerPartial') %>
+</footer>
 
 </body>

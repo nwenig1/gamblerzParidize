@@ -2,9 +2,12 @@
 <html> 
 <head> 
     <title>Cart</title> 
-
+    <link rel="stylesheet" href="/css/main.css">
     </head>
     <body>
+        <header>
+            <%- include('../partials/navpartial') %>
+        </header>
         <h3><%= JSON.stringify(items) %></h3>
         <% items.forEach(function(item, index) { %>
             <div class="product">
