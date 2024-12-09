@@ -37,6 +37,11 @@ app.get('/', (req, res) => {
                                                       
 });
 
+app.get('/logout', (req, res) => {
+    req.session.destroy(); 
+    res.render(__dirname + '/views/pages/login.ejs', );  
+
+}); 
 
 app.get('/products', (req, res) => {
     const productId = (typeof req.query.productId === 'undefined') ? "notSpecified" : req.query.productId
@@ -46,7 +51,7 @@ app.get('/products', (req, res) => {
         productController.getOneItem(req, res, productId); 
     }
 
-})
+});
 
 
 //how we add a route. app.get can be replced with app.post(), etc.
