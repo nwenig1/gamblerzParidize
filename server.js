@@ -84,6 +84,8 @@ app.get('/product/:id', (req, res) => {
 
 app.get('/cart', cartController.displayCart); 
 app.post('/add-to-cart', cartController.handleAddToCart);
+app.post('/remove-from-cart', cartController.removeItemFromCart); 
+app.post('/checkout', cartController.checkout); 
 
 //sets server up on port variable specified at top
 app.listen(port, () => {           

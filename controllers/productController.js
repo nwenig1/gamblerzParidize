@@ -4,7 +4,6 @@ productModel = require("../models/productModel");
 async function getAllItems(req, res){
     items = await productModel.getAllItemsFromDB(); 
     pictures = await productModel.getAllImagesFromDB(); 
-    console.log("All images " + pictures); 
     res.render("../views/pages/allItems.ejs", {products : items, images: pictures}); 
 }
 

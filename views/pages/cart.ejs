@@ -5,11 +5,22 @@
 
     </head>
     <body>
-        <h3><%= JSON.stringify(items) %></h3>
+        <h1> YOUR CART!</h1>
+        <% total = 0 %>
+        <% if(items.length === 0) {%>
+        <h2> Wait nvm your cart is empty :( </h2>
+        <% }else{ %>
         <% items.forEach(function(item, index) { %>
             <div class="product">
                 <h3>Price: $<%= item.price %></h3>
                 <h3> Name: <%= item.name %> </h3>
+                <form action="/remove-from-cart" method="POST">
+                    <input type="hidden" name="productId" value="<%= item.productid %>">
+                    <button type="submit">Remove from cart</button>
+                </form>
+                <h3> Quantity: <%=item.quantity %></h3>
+                <img src="/images/<%=item.filename%>" width=255 height=255>
+                <% total+= (item.quantity * item.price) %>
               
         
             </div>
@@ -17,6 +28,11 @@
             <br>
             <br>
         <% }); %>
+        <h2>Total: $<%=total%></h2>
+        <form action = "/checkout" method = "POST">  
+            <button type = "submit" >Checkout </button>
+        </form>
+        <% } %>  
     
 
     </body>

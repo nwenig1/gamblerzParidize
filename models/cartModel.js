@@ -38,7 +38,7 @@ const pool = new Pool({
 
   async function checkoutModel(userId){
     try{
-    results = await pool.query("DELETE FROM cart WHERE userid = $1", [userId]); 
+    results = await pool.query("DELETE FROM carts WHERE userid = $1", [userId]); 
     return results.rows; 
     } catch(error){
         console.error("Error checking out in model: " + error); 
@@ -47,7 +47,8 @@ const pool = new Pool({
   }
   async function getCartItems(userId){
     try{
-        items = await pool.query("SELECT products.productid, products.name, products.price, carts.quantity, images.filename  FROM products JOIN carts ON carts.productid = products.productid Join images ON images.productid = carts.productid WHERE userid = $1 ", [userId]); 
+        items = await pool.query("SELECT DISTINCT ON (products.productid) products.productid, products.name, products.price, carts.quantity, images.filename  FROM products JOIN carts ON carts.productid = products.productid Join images ON images.productid = carts.productid WHERE userid = $1 ", [userId]); 
+
         console.log("model returned: " + items); 
         return items.rows; 
     } catch(error){
@@ -55,16 +56,19 @@ const pool = new Pool({
         throw error; 
     }
   }
-  async function removeItemFromCart(userId, productId){
+   async function removeItemFromCart(userId, productId){
     try{
-        results = await pool.query("SELECT quantity FROM cart WHERE userid = $1 AND productid = $2", [userId, productId]);
-        currentQuantity = results.rows[0].quantity; 
-        console.log("Current Quantity: " + currentQuantity);  
-        if(currentQuantity === 0 ){
-            await pool.query("DELETE FROM cart WHERE userid = $1 AND productid = $2"); 
+        results = await pool.query("SELECT * FROM carts WHERE userid = $1 AND productid = $2", [userId, productId]);
+        console.log("Results is: " + results); 
+        currentQuantity = results.rows[0].quantity;  
+        if(currentQuantity === 0){
+          res.send("Something has gone terribly wrong :("); 
+        }
+        if(currentQuantity === 1 ){
+            pool.query("DELETE FROM carts WHERE userid = $1 AND productid = $2", [userId, productId]); 
         }else{
             newQuantity = currentQuantity - 1; 
-            await pool.query("UPDATE cart SET quantity = $1 WHERE userId = $2 AND productId = $3", [newQuantity, userId, productId]); 
+            pool.query("UPDATE carts SET quantity = $1 WHERE userId = $2 AND productId = $3", [newQuantity, userId, productId]); 
         }
     } catch(error){
         console.error("Error deleting item from cart in model: " + error); 
