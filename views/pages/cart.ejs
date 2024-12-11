@@ -12,7 +12,14 @@
         <% total = 0 %>
         <% if(items.length === 0) {%>
         <h2> Wait nvm your cart is empty :( </h2>
-        <% }else{ %>
+        <% }else { %>
+          <%  if(typeof(consumerism) != "undefined"){ %>
+            <h2> It seems like you'd also be interested in a <%=consumerism.name%> for <%= consumerism.price %></h2>
+            <form action="/add-to-cart" method="POST">
+                <input type="hidden" name="productId" value="<%= consumerism.productid %>">
+                <button type="submit">Add it to your cart now!</button>
+            </form>
+            <% } %>
         <% items.forEach(function(item, index) { %>
             <div class="product">
                 <h3>Price: $<%= item.price %></h3>

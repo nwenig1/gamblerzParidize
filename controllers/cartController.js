@@ -13,7 +13,14 @@ async function handleAddToCart(req, res) {
 
     try {
         await cartModel.addToCart(userId, productId);
-        res.send("Product added to cart successfully!");
+        recommendedItem = await productModel.getMostSimilarItems(productId)
+        recommendedItemInfo = await productModel.getOneItem(recommendedItem.rows[0].mostsimilarproductid);
+        console.log(recommendedItemInfo);  
+        cartItems = await cartModel.getCartItems(userId);
+
+        console.log("directing to cart after product add"); 
+        res.render("../views/pages/cart.ejs", {items: cartItems, consumerism: recommendedItemInfo});  
+        
     } catch (error) {
         console.error("Error adding to cart:", error);
         res.status(500).send("Failed to add product to cart.");

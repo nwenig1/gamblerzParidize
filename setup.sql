@@ -27,18 +27,6 @@ CREATE TABLE carts (
   FOREIGN KEY (productID) REFERENCES products(productID)
 );
 
-CREATE TABLE tags (
-  tagID SERIAL PRIMARY KEY,
-  tagText VARCHAR(255) NOT NULl
-);
-
-CREATE TABLE productTags (
-  productID INTEGER NOT NULL,
-  tagID INTEGER NOT NULL,
-  FOREIGN KEY (productID) REFERENCES products(productID),
-  FOREIGN KEY (tagID) REFERENCES tags(tagID)
-);
-
 CREATE TABLE images (
   fileName VARCHAR(255) PRIMARY KEY,
   altDescription VARCHAR(255),
@@ -100,8 +88,100 @@ VALUES
   ('bingoBalls2.png', 'bingo balls picture', 12),
   ('bingoBalls3.png', 'bingo balls picture', 12);
 
+  INSERT INTO tags (tagtext)
+  VALUES
+  ('poker'), 
+  ('luck'),
+  ('skill'), 
+  ('utility'),
+  ('starter'),
+  ('notStarter'),
+  ('cheap'), 
+  ('expensive'),
+  ('table'); 
+-- Create an ENUM type for tag categories
+CREATE TYPE tag_category AS ENUM (
+  'poker', 
+  'luck', 
+  'skill', 
+  'utility' ,
+  'starter', 
+  'notStarter', 
+  'cheap', 
+  'expensive', 
+  'table'
+);
 
---assuming product table created like schema 
+-- Create the table with ENUM for tagID
+CREATE TABLE productTags (
+  productID INTEGER NOT NULL,
+  tag tag_category NOT NULL,
+  FOREIGN KEY (productID) REFERENCES products(productID)
+);
+
+INSERT INTO productTags (productID, tag)
+VALUES
+  -- Poker Table
+  (1, 'poker'), 
+  (1, 'skill'), 
+  (1, 'expensive'), 
+  (1, 'table'),
+
+  -- Poker Chips
+  (2, 'poker'), 
+  (2, 'skill'), 
+  (2, 'starter'), 
+  (2, 'cheap'),
+
+  -- Cards
+  (3, 'poker'), 
+  (3, 'utility'), 
+  (3, 'starter'), 
+  (3, 'cheap'),
+
+  -- Roulette Wheel
+  (4, 'luck'), 
+  (4, 'expensive'), 
+  (4, 'table'), 
+
+  -- Dice Set
+  (5, 'luck'), 
+  (5, 'starter'), 
+  (5, 'cheap'),
+
+  -- Craps Table
+  (6, 'luck'), 
+  (6, 'expensive'), 
+  (6, 'table'),
+
+  -- Slot Machine
+  (7, 'luck'), 
+  (7, 'expensive'), 
+  (7, 'notStarter'),
+
+  -- Blackjack Table
+  (8, 'skill'), 
+  (8, 'expensive'), 
+  (8, 'table'),
+
+  -- Dealer Shoe
+  (9, 'utility'), 
+  (9, 'notStarter'), 
+  (9, 'cheap'),
+
+  -- Shuffler
+  (10, 'utility'), 
+  (10, 'notStarter'), 
+  (10, 'cheap'),
+
+  -- Casino Chair
+  (11, 'utility'), 
+  (11, 'notStarter'), 
+  (11, 'expensive'),
+
+  -- Keno Balls
+  (12, 'luck'), 
+  (12, 'expensive');
 
 
 

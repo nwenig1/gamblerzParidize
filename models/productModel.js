@@ -42,7 +42,6 @@ async function getAllItemsFromDB() {
   
   async function getOneItemImages(productId){
     try{
-      console.log("one item's images called"); 
       const images = await pool.query("Select * FROM images WHERE productid = $1", [productId]); 
       return images.rows; 
     } catch(error){
@@ -50,11 +49,36 @@ async function getAllItemsFromDB() {
       throw error; 
     }
   }
+  async function getMostSimilarItems(productId){
+    try{
+      const items = await pool.query(`SELECT 
+  pt2.productID AS MostSimilarProductID
+FROM 
+  productTags pt1
+JOIN 
+  productTags pt2
+ON 
+  pt1.tag = pt2.tag AND pt1.productID <> pt2.productID
+WHERE 
+  pt1.productID = $1
+GROUP BY 
+  pt2.productID
+ORDER BY 
+  COUNT(*) DESC
+LIMIT 3;`, [productId]); 
     
+      return items; 
+    } catch(error){
+      console.error("error getting single item in model"); 
+      throw error; 
+    }
+
+  }
 
     module.exports = {
       getAllItemsFromDB,
       getAllImagesFromDB, 
       getOneItem, 
-      getOneItemImages
+      getOneItemImages,
+      getMostSimilarItems
     }; 
