@@ -49,8 +49,6 @@ VALUES
   ('Casino Chair', 'Ergonomic casino chair for comfortable gaming', 79.99),
   ('Keno Balls', 'Set of numbered Keno balls, 1-80', 19.99); 
 
-  INSERT INTO productTags()
-
 INSERT INTO images (fileName, altDescription, productID)
 VALUES  
   ('pokerTable1.png', 'poker table picture', 1), 

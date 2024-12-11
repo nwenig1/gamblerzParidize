@@ -14,9 +14,19 @@ async function getOneItem(req, res, productId){
     res.render("../views/pages/oneItem.ejs", {product: item, images: pictures}); 
 }
 
+async function getMostSimilarItems(req, res){
+    //function can change a bit for control flow. will probably not have req, res, just prod id as input
+    //will send items to some other controller for pop up in add to cart control flow?
+    productId = 1; 
+    items = await productModel.getMostSimilarItems(productId); 
+    console.log(items.rows); 
+    res.send(items.rows); 
+}
+
 
 
 module.exports ={
     getAllItems,
-    getOneItem
+    getOneItem,
+    getMostSimilarItems
 }; 

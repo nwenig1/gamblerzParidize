@@ -50,8 +50,8 @@ app.get('/products', (req, res) => {
     }else{
         productController.getOneItem(req, res, productId); 
     }
-
 });
+app.get('/similar', productController.getMostSimilarItems);  
 
 
 //how we add a route. app.get can be replced with app.post(), etc.
