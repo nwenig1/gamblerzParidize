@@ -66,6 +66,7 @@ GROUP BY
 ORDER BY 
   COUNT(*) DESC
 LIMIT 3;`, [productId]); 
+    
       return items; 
     } catch(error){
       console.error("error getting single item in model"); 
