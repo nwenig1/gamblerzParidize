@@ -1,6 +1,4 @@
---add admin bool to this 
---always 0 for controller 
---hard code in an admin user?
+
 CREATE TABLE users (
   userID SERIAL PRIMARY KEY,
   username VARCHAR(128) UNIQUE NOT NULL,
@@ -22,7 +20,6 @@ CREATE TABLE carts (
   userID INTEGER NOT NULL,
   productID INTEGER NOT NULL,
   quantity INTEGER NOT NULL,
-  engravingText VARCHAR(64),
   FOREIGN KEY (userID) REFERENCES users(userID),
   FOREIGN KEY (productID) REFERENCES products(productID)
 );
@@ -88,18 +85,7 @@ VALUES
   ('bingoBalls2.png', 'bingo balls picture', 12),
   ('bingoBalls3.png', 'bingo balls picture', 12);
 
-  INSERT INTO tags (tagtext)
-  VALUES
-  ('poker'), 
-  ('luck'),
-  ('skill'), 
-  ('utility'),
-  ('starter'),
-  ('notStarter'),
-  ('cheap'), 
-  ('expensive'),
-  ('table'); 
--- Create an ENUM type for tag categories
+--stuff for advanced function below
 CREATE TYPE tag_category AS ENUM (
   'poker', 
   'luck', 
@@ -112,7 +98,6 @@ CREATE TYPE tag_category AS ENUM (
   'table'
 );
 
--- Create the table with ENUM for tagID
 CREATE TABLE productTags (
   productID INTEGER NOT NULL,
   tag tag_category NOT NULL,
@@ -182,13 +167,3 @@ VALUES
   -- Keno Balls
   (12, 'luck'), 
   (12, 'expensive');
-
-
-
-  
-
-
-
-
-
-
