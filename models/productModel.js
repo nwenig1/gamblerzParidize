@@ -65,7 +65,7 @@ GROUP BY
   pt2.productID
 ORDER BY 
   COUNT(*) DESC
-LIMIT 3;`, [productId]); 
+LIMIT 1;`, [productId]); 
     
       return items; 
     } catch(error){
