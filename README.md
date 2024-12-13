@@ -1,6 +1,6 @@
 # Installation
 
-Make sure you have postgres installed! And run all setup.sql commands on your local postgres database
+Make sure you have postgres installed and run all setup.sql commands on your local postgres database!
 
 ```
 npm install bcrypt
